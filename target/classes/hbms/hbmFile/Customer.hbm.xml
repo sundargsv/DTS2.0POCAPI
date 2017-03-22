@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class lazy="false" name="com.zinnia.model.customer.Customer" table="customer">
+		<id name="id" type="long" unsaved-value="null">
+			<column name="id" not-null="true"/>
+			<generator class="identity"/>
+		</id>
+		<version name="version" type="long"/>
+		<property name="name">
+		</property>
+		<property name="description">
+		</property>
+		<property name="enteredBy">
+		</property>
+		<property name="entered">
+		</property>
+		<property name="modifiedBy">
+		</property>
+		<property name="modified">
+		</property>
+		<property name="enabled">
+		</property>
+		<property name="top30">
+		</property>
+		<property name="CKRNumber">
+		</property>
+		
+		<component class="com.zinnia.model.payment.ContactPerson" name="contactPerson"> <!-- class attribute optional -->
+		<property name="salutation"/>     
+		<property name="title"/>     
+		<property name="initials">  </property> 
+		<property name="surnamePrefix">  </property> 
+		<property name="surname">  </property> 
+		<property name="contactNumber">  </property> 
+		<property name="faxNumber">  </property>
+		<property name="department">  </property> 
+		<property index="customer_emailId1298" name="emailId">  </property> 
+		</component>             
+		<property name="COCNumber">
+		</property>
+		<property name="COCRegistrationType">
+			<type name="com.zinnia.core.util.db.EnumUserType">
+				<param name="enumClassName">com.zinnia.model.customer.CocRegistrationType</param>
+			</type>
+		</property>
+		<property name="userName">
+		</property>
+		<property name="BIKCode">
+		</property>
+		<property name="VATNumber">
+		</property>
+		<property name="organizationName">
+		</property>
+		<property name="partyName">
+		</property>
+		<property name="branchName">
+		</property>
+		<many-to-one column="market_id" index="customer_market0545" name="market" update="true"/>
+		<many-to-one column="marketGroup_id" index="customer_marketGroup0546" name="marketGroup" update="true"/>		
+		<many-to-one column="marketSegment_id" index="customer_marketSegme0547" name="marketSegment" update="true"/>
+		<many-to-one column="telecomRegion_id" index="customer_telecomRegi0548" name="telecomRegion" update="true"/>
+		<property name="customerStatus">
+			<type name="com.zinnia.core.util.db.EnumUserType">
+				<param name="enumClassName">com.zinnia.model.customer.CustomerStatus</param>
+			</type>
+		</property>
+		<property name="financialStatus">
+			<type name="com.zinnia.core.util.db.EnumUserType">
+				<param name="enumClassName">com.zinnia.model.customer.FinancialStatus</param>
+			</type>
+		</property>
+		<property name="invoiceConsolidation">
+		</property>
+		<property name="taxExemption">
+		</property>
+		<component class="com.zinnia.model.customer.CustomerSpecification" name="customerSpecification"> <!-- class attribute optional -->
+			<many-to-one column="customerType_id" index="customer_customerTyp0549" name="customerType" update="true"/>
+			<property name="internalCustomerSubType">
+				<type name="com.zinnia.core.util.db.EnumUserType">
+					<param name="enumClassName">com.zinnia.model.customer.InternalCustomerSubType</param>
+				</type>
+			</property>
+			<property name="externalCustomerSubType">
+				<type name="com.zinnia.core.util.db.EnumUserType">
+					<param name="enumClassName">com.zinnia.model.customer.ExternalCustomerSubType</param>
+				</type>
+			</property>
+		<property name="accountingUnit"/>
+		</component>
+		
+		<component class="com.zinnia.model.geography.Address" name="billingAddress"> <!-- class attribute optional -->
+			<property column="billing_houseNumber" name="houseNumber">
+			</property>
+			<property column="billing_houseNumberExtension" name="houseNumberExtension">
+			</property>
+			<property column="billing_streetName" name="streetName">
+			</property>
+			<property column="billing_cityName" name="cityName">
+			</property>
+			<property column="billing_zipCode" name="zipCode">
+			</property>
+			<property column="billing_country" name="country">
+			</property>
+		</component>
+		<component class="com.zinnia.model.geography.Address" name="customerAddress"> <!-- class attribute optional -->
+			<property name="houseNumber">
+			</property>
+			<property name="houseNumberExtension">
+			</property>
+			<property name="streetName">
+			</property>
+			<property name="cityName">
+			</property>
+			<property name="zipCode">
+			</property>
+
+			<property name="country"></property>
+		</component>
+
+
+		<property column="OCM_CUSTOMERID" name="OCMCustomerId"></property>
+
+
+			<property column="DIRECTORINFO1" name="directoreInfo1"></property>
+			<property column="DIRECTORINFO2" name="directoreInfo2"></property>
+			<property column="SHAREHOLDERINFO1" name="shareHolderInfo1"></property>
+			<property column="SHAREHOLDERINFO2" name="shareHolderINfo2"></property>
+			<property column="STARTDATE" name="startDate"></property>
+			<property column="ENDDATE" name="endDate"></property>
+			<property column="MOBILE_NUMBER" name="mobileNumber"></property>
+			<property column="SHAREHOLDER_SALUTATION" name="shareHolderSalutation"></property>
+			<property column="SHAREHOLDER_NAME" name="shareHolderName"></property>
+			<property column="SHAREHOLDER_ADDRESSLINE1" name="shareHolderAddressline1"></property>
+			<property column="SHAREHOLDER_ADDRESSLINE2" name="shareHolderAddressline2"></property>
+			<property column="SHAREHOLDER_ADDRESSLINE3" name="shareHolderAddressline3"></property>
+			<property column="SHAREHOLDER_ADDRESSLINE4" name="shareHolderAddressline4"></property>
+			<property column="SHAREHOLDER_POSTCODE" name="shareHolderPostCode"></property>
+			<property column="SHAREHOLDER_COUNTRY" name="shareHolderCountry"></property>
+			<property column="SHAREHOLDER_PHONENUMBER" name="shareHolderPhoneNumber"></property>
+			<property column="SHAREHOLDER_EMAILID" name="shareHolderEmailId"></property>
+			
+			<property column="DIRECTOR_SALUTATION" name="directorSalutation"></property>
+			<property column="DIRECTOR_NAME" name="directorName"></property>
+			<property column="DIRECTOR_ADDRESSLINE1" name="directorAddressline1"></property>
+			<property column="DIRECTOR_ADDRESSLINE2" name="directorAddressline2"></property>
+			<property column="DIRECTOR_ADDRESSLINE3" name="directorAddressline3"></property>
+			<property column="DIRECTOR_ADDRESSLINE4" name="directorAddressline4"></property>
+			<property column="DIRECTOR_POSTCODE" name="directorPostCode"></property>
+			<property column="DIRECTOR_COUNTRY" name="directorCountry"></property>
+			<property column="DIRECTOR_PHONENUMBER" name="directorPhoneNumber"></property>
+			<property column="DIRECTOR_EMAILID" name="directorEmailId"></property>
+			
+			<property name="dissConnectionReason" column="change_reason"></property>
+			
+
+
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,488 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<query name="getWorkflowSchemaofratematrix">
+                    from com.zinnia.model.workflowRules.RateMatrixRule order by priority desc
+                   
+                   </query>
+                   
+                   <query name="getWorkflowSchemasintheratematrix">
+                   from com.zinnia.model.workflowRules.RateMatrixRule order by priority asc
+                   
+                   </query>
+ <query name="getWorkflowtariffplanruleInDescendingOrder"><![CDATA[
+                   from com.zinnia.model.workflowRules.TariffPlanRule order by priority desc
+                   
+                   ]]>
+                   </query>
+ <query name="getWorkflowtariffplanrule"><![CDATA[
+                   from com.zinnia.model.workflowRules.TariffPlanRule order by priority asc
+                   
+                   ]]>
+                   </query>
+    <query name="getWorkflowfeatureruleInDescendingOrder"><![CDATA[
+                   from com.zinnia.model.workflowRules.FeatureRule order by priority desc
+                    ]]>
+                   </query>  
+
+      <query name="getWorkflowFeatureRule"><![CDATA[
+                   from com.zinnia.model.workflowRules.FeatureRule order by priority asc
+                   
+                   ]]>
+                   </query>
+	<query name="getOfferByOfferCategoryAndOfferName">
+			<![CDATA[
+			from com.zinnia.model.inventory.offer.Offer as offer
+			 where offerCategory.id = :OfferCategoryId and upper(name) like upper(:OfferName)
+			]]>
+	</query>
+	<query name="getAttributeById">
+		<![CDATA[
+		from com.zinnia.model.workbench.Attribute as attribute
+		 where id = :id
+		]]>
+	</query>
+	<query name="getWorkflowSchemasInDescendingOrder"><![CDATA[
+                   from com.zinnia.model.workflowRule.FeatureBundleRule order by priority desc
+                   
+                   ]]>
+                   </query>   
+	<query name="getWorkflowFeatureBundleRule"><![CDATA[
+                   from com.zinnia.model.workflowRule.FeatureBundleRule order by priority asc
+                   
+                   ]]>
+                   </query>   
+	   
+<!-- <query name="getWorkflowFeatureBundleRuleAscendingOrder"><![CDATA[
+                   from com.zinnia.model.workflowRule.FeatureBundleRule order by priority asc
+                   
+                   ]]></query>  -->
+	<query name="getVolumeDiscountId">
+		<![CDATA[
+		from com.zinnia.model.volumediscount.VolumeDiscount 
+		 where offer.id = :offerId and offerComponentIds = :offerComponentIds and priority = :priority
+		]]>
+	</query>
+	<query name="getFeatureVolumeDiscountId">
+		<![CDATA[
+		from com.zinnia.model.volumediscount.VolumeDiscount 
+		 where offer.id = :offerId and offerComponentIds = :offerComponentIds and subscriptionLimit <= :subscriptionLimit
+		 and catalogChargeType = :chargeCategory
+		]]>
+	</query>
+	<query name="getServiceVolumeDiscountId">
+		<![CDATA[
+		from com.zinnia.model.volumediscount.VolumeDiscount 
+		 where offer.id = :offerId and offerComponentIds = :offerComponentIds and subscriptionLimit <= :subscriptionLimit
+		 and catalogChargeType = :chargeCategory and priority = :priority
+		]]>
+	</query>
+	<query name="getRoutingNumberForOperator">
+		<![CDATA[
+		from com.zinnia.model.routing.RoutingNumber
+		 where operator.id = :operator
+		]]>
+	</query>
+	<query name="getTariffCode">
+		<![CDATA[
+		from com.zinnia.model.ordermanagement.ServiceAttributesValue
+		 where attributeName = :attributeName
+		]]>
+	</query>
+	<query name="getTariffClass">
+		<![CDATA[
+		from com.zinnia.model.rating.Tariff
+		 where tariffClass = :tariffClass
+		]]>
+	</query>
+	<query name="getOfferDiscountWrapper">
+		<![CDATA[
+		from com.zinnia.model.inventory.offer.OfferDiscountWrapper
+		 where offer.id = :offerId
+		]]>
+	</query>
+	<query name="getOfferRentalDiscountWrapper">
+		<![CDATA[
+		from com.zinnia.model.inventory.offer.OfferRentalDiscountWrapper
+		 where offer.id = :offerId
+		]]>
+	</query>
+	<query name="getCustomNRCDetail">
+		<![CDATA[
+		from com.zinnia.model.inventory.offer.CustomNRCDetail
+		 where catalogComponentId = :componentId
+		]]>
+	</query>
+	<query name="getOfferServiceCharge">
+		<![CDATA[
+		from com.zinnia.model.inventory.offer.OfferServiceCharge 
+		 where offer.id = :offerId and service.id = :serviceId
+		]]>
+	</query>
+	<query name="getOperatorCustomers">
+		<![CDATA[
+		from com.zinnia.model.customer.Customer
+		 where externalCustomerSubType = :externalcustomersubtype
+		]]>
+	</query>
+	<query name="getDefFeatureMapping">
+		<![CDATA[
+		from com.zinnia.model.inventory.product.DefaultFeatureMapping
+		 where product.id = :productId and service.id = :serviceId and feature.id = :featureId
+		]]>
+	</query>
+	<query name="getDefFeatureMappingByProductAndServiceId">
+		<![CDATA[
+		from com.zinnia.model.inventory.product.DefaultFeatureMapping
+		 where product.id = :productId and service.id = :serviceId
+		]]>
+	</query>
+	<query name="getOperatorByPQRAndOperatorId">
+		<![CDATA[
+		from com.zinnia.model.routing.Operator
+		 where id <> :operatorId and pqr = :pqr 
+		]]>
+	</query>
+	<query name="getTariffByTariffClassAndTariffId">
+		<![CDATA[
+		from com.zinnia.model.rating.Tariff
+		 where id <> :tariffId and tariffClass = :tariffClass 
+		]]>
+	</query>
+	<query name="getIdAndNamesForAllOffers">
+		<![CDATA[
+		select id, name 
+		from com.zinnia.model.inventory.offer.Offer
+		order by name asc
+		]]>
+	</query>
+	<query name="getIdAndNamesForAllServices">
+		<![CDATA[
+		select id, name 
+		from com.zinnia.model.inventory.product.Service
+		order by name asc
+		]]>
+	</query>
+	<query name="getIdAndNamesForAllFeatures">
+		<![CDATA[
+		select id, name 
+		from com.zinnia.model.billing.rateplan.Feature
+		order by name asc
+		]]>
+	</query>
+	<query name="getIdAndNamesForAllChargeComponents">
+		<![CDATA[
+		select id, name 
+		from com.zinnia.model.rating.ChargeComponent
+		]]>
+	</query>
+	<query name="getIdAndNamesForAllUsageTypes">
+		<![CDATA[
+		select id, name 
+		from com.zinnia.model.mediation.UsageType
+		]]>
+	</query>
+	<query name="getIdAndNamesForAllRentalChargeSpecs">
+		<![CDATA[
+		select id, name 
+		from com.zinnia.model.discount.RentalChargeSpecification
+		where discountWrapperLevelDetail =:discountWrapperLevelDetail
+		order by name asc
+		]]>
+	</query>
+	<query name="getRentalApplicabilityIds">
+		<![CDATA[
+		select catalogComponentType,catalogComponentId 
+		from com.zinnia.model.discount.RentalDiscountCriteria 
+		where criteriaType =:criteriaType and criteriaId =:criteriaId
+		]]>
+	</query>
+	<query name="getRentalEligibilityIds">
+		<![CDATA[
+		select catalogComponentType,catalogComponentId 
+		from com.zinnia.model.discount.RentalDiscountCriteria 
+		where criteriaType =:criteriaType and criteriaId =:criteriaId
+		]]>
+	</query>
+	<query name="getDiscountComplexityFromApplicabilityId">
+		<![CDATA[
+		select discountComplexity
+		from com.zinnia.model.discount.RentalApplicabilitySlab 
+		where rentalDiscountApplicability.id =:rentalDiscountApplicabilityId 
+		]]>
+	</query>
+	<query name="getRentalApplicabilitySlabFromApplicabilityId"> 
+		<![CDATA[ 
+		select id,slabMax,discount.id,discount.name
+		from com.zinnia.model.discount.RentalApplicabilitySlab 
+		where rentalDiscountApplicability.id =:rentalDiscountApplicabilityId  
+		]]>
+	</query>
+	<query name="getRentalApplicabilityAmountFromApplicabilityId"> 
+		<![CDATA[ 
+		select id,discountType,amount
+		from com.zinnia.model.discount.RentalApplicabilitySlab 
+		where rentalDiscountApplicability.id =:rentalDiscountApplicabilityId  
+		]]>
+	</query>
+	<query name="getRentalApplicabilitySlabIdFromApplicabilityId"> 
+		<![CDATA[ 
+		select id
+		from com.zinnia.model.discount.RentalApplicabilitySlab 
+		where rentalDiscountApplicability.id =:rentalDiscountApplicabilityId  
+		]]>
+	</query>
+	<query name="getDiscComplexityFromUsageAppId">
+		<![CDATA[
+		select discountComplexity
+		from com.zinnia.model.discount.UsageApplicabilitySlab 
+		where usageApplicability.id =:usageApplicabilityId 
+		]]>
+	</query>
+	<query name="getUsageApplicabilitySlabIdsFromApplicabilityId"> 
+		<![CDATA[ 
+		select id
+		from com.zinnia.model.discount.UsageApplicabilitySlab 
+		where usageApplicability.id =:usageApplicabilityId  
+		]]>
+	</query>
+	<query name="getUsageApplicabilitySlabFromApplicabilityId"> 
+		<![CDATA[ 
+		select id,slabMax,discount.id,discount.name
+		from com.zinnia.model.discount.UsageApplicabilitySlab 
+		where usageApplicability.id =:usageApplicabilityId order by slabMax asc
+		]]>
+	</query>
+	<query name="getUsageApplicabilityAmountFromApplicabilityId"> 
+		<![CDATA[ 
+		select id,discountType,amount 
+		from com.zinnia.model.discount.UsageApplicabilitySlab 
+		where usageApplicability.id =:usageApplicabilityId  
+		]]>
+	</query>
+	<query name="getUsageApplicabilitySlabIdFromApplicabilityId"> 
+		<![CDATA[ 
+		select id 
+		from com.zinnia.model.discount.UsageApplicabilitySlab 
+		where usageApplicability.id =:usageApplicabilityId  
+		]]>
+	</query>
+	<query name="getServiceIdsAndNamesForOffer"> 
+		<![CDATA[ 
+		 select service.id,service.name
+		 from com.zinnia.model.inventory.product.ProductService 
+		 where product.id =:productId 
+		]]>
+	</query>
+	<query name="getFeatureIdsAndNamesForService"> 
+		<![CDATA[ 
+		 select sf.feature.id,sf.feature.name
+		 from com.zinnia.model.inventory.product.ServiceFeature sf
+		 where sf.service.id =:serviceId
+		]]>
+	</query>
+	<query name="getFeatureIdsAndNamesForOffer"> 
+		<![CDATA[ 
+		 select distinct sf.feature.id,sf.feature.name
+		 from com.zinnia.model.inventory.product.ServiceFeature sf
+		 where sf.service.id in
+		 	(select ps.service.id 
+		 	from com.zinnia.model.inventory.product.ProductService ps 
+		 	where ps.product.id =:productId)
+		]]>
+	</query>
+	<query name="getSequenceNumbersForPQR"> 
+		<![CDATA[ 
+		select r.sequenceNumber
+		from com.zinnia.model.routing.RoutingNumber r, com.zinnia.model.routing.Operator op
+		where r.operator.id = op.id and op.pqr =:pqrValue order by r.sequenceNumber asc
+		]]>
+	</query>
+	<query name="getMappedOfferUsageDiscountWrappers"> 
+		<![CDATA[ 
+		select aod.discountWrapperId
+		from com.zinnia.model.inventory.offer.OfferDiscountWrapper odw,com.zinnia.model.ordermanagement.AccountOfferDiscount aod
+		where odw.id = aod.discountWrapperId and aod.discountWrapperType = 0 and odw.id =:offerDiscountWrapperId
+		]]>
+	</query>
+	<query name="getMappedOfferRentalDiscountWrappers"> 
+		<![CDATA[ 
+		select aod.discountWrapperId
+		from com.zinnia.model.inventory.offer.OfferRentalDiscountWrapper odw,com.zinnia.model.ordermanagement.AccountOfferDiscount aod
+		where odw.id = aod.discountWrapperId and aod.discountWrapperType = 1 and odw.id =:offerDiscountWrapperId
+		]]>
+	</query>
+	<query name="getMappedServiceUsageDiscountWrappers"> 
+		<![CDATA[ 
+		select asd.serviceDiscountWrapperId
+		from com.zinnia.model.inventory.offer.ServiceUsageDiscountWrapper sdw,com.zinnia.model.ordermanagement.AccountServiceDiscount asd
+		where sdw.id = asd.serviceDiscountWrapperId and asd.discountWrapperType = 0 and sdw.id =:serviceDiscountWrapperId
+		]]>
+	</query>
+	<query name="getMappedServiceRentalDiscountWrappers"> 
+		<![CDATA[ 
+		select asd.serviceDiscountWrapperId
+		from com.zinnia.model.inventory.offer.ServiceRentalDiscountWrapper sdw,com.zinnia.model.ordermanagement.AccountServiceDiscount asd
+		where sdw.id = asd.serviceDiscountWrapperId and asd.discountWrapperType = 1 and sdw.id =:serviceDiscountWrapperId
+		]]>
+	</query>
+	<query name="getMappedFeatureRentalDiscountWrappers"> 
+		<![CDATA[ 
+		select afd.featureDiscountWrapperId
+		from com.zinnia.model.inventory.offer.FeatureRentalDiscountWrapper fdw,com.zinnia.model.ordermanagement.AccountFeatureDiscount afd
+		where fdw.id = afd.featureDiscountWrapperId and afd.discountWrapperType = 1 and fdw.id =:featureDiscountWrapperId
+		]]>
+	</query>
+	<query name="getOfferAttributeNamesAndTypes"> 
+		<![CDATA[ 
+		select ca.name, ca.attributeType
+		from com.zinnia.model.inventory.offer.OfferAttribute oa, com.zinnia.model.inventory.product.CatalogAttribute ca
+		where oa.catalogAttribute.id = ca.id and oa.offer.id =:offerId order by oa.sequence
+		]]>
+	</query>
+	<query name="getServiceAttributeNamesAndTypes"> 
+		<![CDATA[ 
+		select ca.name, ca.attributeType
+		from com.zinnia.model.inventory.product.ServiceAttribute sa, com.zinnia.model.inventory.product.CatalogAttribute ca
+		where sa.catalogAttribute.id = ca.id and sa.service.id =:serviceId order by sa.sequence
+		]]>
+	</query>
+	<query name="getFeatureAttributeNamesAndTypes"> 
+		<![CDATA[ 
+		select ca.name, ca.attributeType
+		from com.zinnia.model.inventory.product.FeatureAttribute fa, com.zinnia.model.inventory.product.CatalogAttribute ca
+		where fa.catalogAttribute.id = ca.id and fa.feature.id =:featureId order by fa.sequence
+		]]>
+	</query>
+	<query name="getOverrideServiceCharge"> 
+		<![CDATA[ 
+		from com.zinnia.model.inventory.offer.OfferServiceCharge
+		where offer.id =:offerId and service.id =:serviceId
+		]]>
+	</query>
+	<query name="getFixedValue"> 
+		<![CDATA[ 
+		from com.zinnia.model.inventory.product.ServiceAttribute
+		where service.id =:serviceId and catalogAttribute.id =:catalogAttributeId
+		]]>
+	</query>
+	<query name="getEnumValues"> 
+		<![CDATA[ 
+		select caev.enumValue
+		from com.zinnia.model.inventory.product.CatalogAttribute ca,
+		com.zinnia.model.inventory.product.CatalogAttributeEnumValues caev
+		where ca.id = caev.catalogAttribute.id
+		and ca.name like :attributeName
+		]]>
+	</query>
+	<query name="getSAEnumValues"> 
+		<![CDATA[ 
+		select saev.enumValue
+		from com.zinnia.model.inventory.product.CatalogAttribute ca,
+		com.zinnia.model.inventory.product.ServiceAttribute sa,
+		com.zinnia.model.inventory.product.ServiceAttributeEnumValues saev
+		where ca.id = sa.catalogAttribute.id and sa.id = saev.serviceAttribute.id
+		and ca.name like :attributeName
+		and sa.service.id =:serviceId
+		]]>
+	</query>
+	<query name="getFAEnumValues"> 
+		<![CDATA[ 
+		select faev.enumValue
+		from com.zinnia.model.inventory.product.CatalogAttribute ca,
+		com.zinnia.model.inventory.product.FeatureAttribute fa,
+		com.zinnia.model.inventory.product.FeatureAttributeEnumValues faev
+		where ca.id = fa.catalogAttribute.id and fa.id = faev.featureAttribute.id
+		and ca.name like :attributeName
+		and fa.feature.id =:serviceId
+		]]>
+	</query>
+	<query name="getFAListValues"> 
+		<![CDATA[ 
+		select falv.listValue
+		from com.zinnia.model.inventory.product.CatalogAttribute ca,
+		com.zinnia.model.inventory.product.FeatureAttribute fa,
+		com.zinnia.model.inventory.product.FeatureAttributeListValues falv
+		where ca.id = fa.catalogAttribute.id and fa.id = falv.featureAttribute.id
+		and ca.name like :attributeName
+		and fa.feature.id =:serviceId
+		]]>
+	</query>
+	<query name="getAllServicesAndAttributes"> 
+		<![CDATA[ 
+			select s.id,s.name, ca.id, ca.name, ca.attributeType
+ 			from com.zinnia.model.inventory.product.Service s, com.zinnia.model.inventory.product.ServiceAttribute sa,
+ 			com.zinnia.model.inventory.product.CatalogAttribute ca
+			where s.id = sa.service.id
+			and sa.catalogAttribute.id = ca.id
+			order by s.id asc, sa.sequence asc
+		]]>
+	</query>
+	<query name="getAllServiceIds"> 
+		<![CDATA[ 
+			select id
+			from com.zinnia.model.inventory.product.Service
+		]]>
+	</query>
+	<query name="validateServiceTransferRule"> 
+		<![CDATA[ 
+			select id 
+			from com.zinnia.model.inventory.product.ProductService 
+			where service.id =:serviceId and product.id in 
+												(select product.id 
+													from com.zinnia.model.inventory.offer.Offer 
+													where id =:offerId)
+		]]>
+	</query>
+	<query name="checkServiceNumberInAccountService"> 
+		<![CDATA[ 
+			select id 
+			from com.zinnia.model.ordermanagement.AccountService 
+			where identifier =:identifier
+		]]>
+	</query>
+	<query name="checkServiceNumberInAccountServiceForDelete"> 
+		<![CDATA[ 
+			select id
+			from com.zinnia.model.ordermanagement.AccountService 
+			where identifier in(
+                    select identifier
+                    from com.zinnia.model.inventory.product.ServiceNumberInventory 
+                    where id=:serviceNumberId and serviceNumberStatus in(1,2,3))
+		]]>
+	</query>
+	<query name="deleteServiceTariff"> 
+		<![CDATA[ 
+			select sa.attributeValue
+			from com.zinnia.model.ordermanagement.ServiceAttributesValue sa,
+			com.zinnia.model.ordermanagement.AccountService asv
+			where sa.accountService.id = asv.id
+			and sa.catalogAttribute.id =:catalogAttributeId
+			and sa.attributeValue =:tariffClass
+			and asv.service.id =:serviceId
+		]]>
+	</query>
+	<query name="getDutchInvoiceTextByType"> 
+		<![CDATA[ 
+		 select it.id , it.description
+		 from com.zinnia.model.inventory.InvoiceText it
+		 where it.invoiceTextType =:invoiceTextType
+		 order by it.id asc
+		]]>
+	</query>
+	<sql-query name="getOverrideInvoiceTextByTypeAndLanguage">
+	 <![CDATA[
+			select it.id, it.description, io.id, io.overridetext
+			from invoicetext it FULL OUTER JOIN invoicetextoverride io
+			on it.id = io.invoicetext_id and io.language_id = :languageId
+			where it.invoicetexttype = :invoiceTextType
+			order by it.id asc
+       ]]>
+	</sql-query>
+</hibernate-mapping>
